@@ -6,7 +6,7 @@ An event listener to store information in the database.
 
 * [Docker 20.10.6+](https://www.docker.com/get-started)
 * [Compose 3.3+](https://docs.docker.com/compose/install/)
-* [Go 1.15+](https://golang.org/)
+* [Go 1.16+](https://golang.org/)
 * [Postgresql 12.6](https://www.postgresql.org/)
 
 ## Running the service
