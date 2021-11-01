@@ -11,7 +11,6 @@ import (
 )
 
 func List(w http.ResponseWriter, r *http.Request) {
-
 	req, err := requests.NewGetPersonListRequest(r)
 	if err != nil {
 		ape.RenderErr(w, problems.BadRequest(err)...)

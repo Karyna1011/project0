@@ -17,28 +17,11 @@ An event listener to store information in the database.
 
       ```sh
       db:
-         url: "postgresql://[userspec@][hostspec][/dbname][?paramspec]"
+         url: "postgresql://[userspec]@[hostspec][/dbname][?paramspec]"
       ```
 
-    * If you are using local blockchain (e.g Ganache), provide other endpoint
 
-      ```sh
-      rpc:
-         endpoint: "https://localhost"
-      ```
-
-2. Open project using IDE (e.g GoLand from JetBrains), open IDE terminal, run
-
-   ```sh
-   go mod init
-   ```
-
-3. At *bsc-checker-events/assets/main.go* run two migration related scripts:
-   ```sh
-   //go:generate packr2 clean
-   //go:generate packr2
-    ```
-4. Modify run configuration as follows:
+2.Add environment variable in the run configuration :
     * KV_VIPER_FILE=config.yaml *(environment variable)*
 5. Run service twice with the following command arguments:
 
@@ -47,21 +30,7 @@ An event listener to store information in the database.
    run service
    ```
 
-#### For deployment purposes
-1. Navigate to the cloned repository
-2. Do the step 1 from development build, except modify config at *configs/spaceship-staking.yaml*, changing contract address and database url (for the contract deployed on the Binance Smart Chain leave the endpoint as it is
-3. Build container image:
-
-   ```sh
-   docker build -t spaceship-staking .
-	```
-4. Run using docker-compose
-   ```sh
-   docker-compose down -v
-   docker-compose up -d
-	```
-
-### API
+# API
 To change port, configure
 ```sh
 listener:

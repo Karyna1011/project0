@@ -9,7 +9,6 @@ import (
 )
 
 func (s *service) router(cfg config.Config) chi.Router {
-
 	r := chi.NewRouter()
 
 	r.Use(
