@@ -1,4 +1,4 @@
-package functions
+package postgres
 
 import (
 	"database/sql"
@@ -17,7 +17,6 @@ type personQ struct {
 	db  *pgdb.DB
 	sql squirrel.SelectBuilder
 }
-
 
 func NewPersonQ(db *pgdb.DB) data.PersonQ {
 	return &personQ{
@@ -42,10 +41,10 @@ func (d *personQ) Get() (*data.Person, error) {
 	return &result, err
 }
 
-func (d *personQ) Select() ([]data.Person, error) {
+func (d *personQ) Select(query pgdb.OffsetPageParams) ([]data.Person, error) {
 	var result []data.Person
 
-	err := d.db.Select(&result, d.sql)
+	err := d.db.Select(&result, query.ApplyTo(d.sql, "id"))
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}

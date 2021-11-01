@@ -1,37 +1,39 @@
 package handlers
 
 import (
-	"encoding/json"
+	"github.com/go-chi/chi"
 	"gitlab.com/distributed_lab/ape"
-	"gitlab.com/tokend/subgroup/project/resources"
+	"gitlab.com/distributed_lab/ape/problems"
 	"net/http"
+	"strconv"
 )
 
-func GETHandler(w http.ResponseWriter, r *http.Request) {
-	people, err := Person(r).Select()
+func GetByIndex(w http.ResponseWriter, r *http.Request) {
+	idString := chi.URLParam(r, "id")
+
+	personQ := Person(r)
+
+	id, err := strconv.ParseInt(idString, 10, 64)
+
 	if err != nil {
-		Log(r).WithError(err).Debug("error selecting persons")
-		w.WriteHeader(http.StatusInternalServerError)
+		Log(r).WithError(err).Error("failed to parse mission id")
+		ape.Render(w, problems.InternalError())
 		return
 	}
 
-	var response = make([]resources.PersonResponse, len(people))
-	for i, p := range people {
-		response[i] = p.Resource()
+	person, err := personQ.FilterById(id).Get()
+
+	if err != nil {
+		Log(r).WithError(err).Error("failed to get person")
+		ape.Render(w, problems.InternalError())
+		return
 	}
 
-	ape.Render(w, response)
-}
-
-func GetMessage(w http.ResponseWriter, r *http.Request) {
-     message:= "Hello everybody"
-	if err := json.NewEncoder(w).Encode(message);
-
-	err != nil {
-		panic(err)
+	if person == nil {
+		ape.Render(w, problems.NotFound())
+		return
 	}
-	ape.Render(w, message)
+
+	ape.Render(w, person.Resource())
+
 }
-
-
-

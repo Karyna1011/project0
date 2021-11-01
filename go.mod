@@ -19,9 +19,10 @@ require (
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/spf13/cobra v1.2.1 // indirect
 	gitlab.com/distributed_lab/ape v1.6.1
-	gitlab.com/distributed_lab/figure v2.1.0+incompatible
+	gitlab.com/distributed_lab/figure v2.1.0+incompatible // indirect
 	gitlab.com/distributed_lab/kit v1.8.6
 	gitlab.com/distributed_lab/logan v3.8.0+incompatible
+	gitlab.com/distributed_lab/urlval v2.3.0+incompatible
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/sys v0.0.0-20211020174200-9d6173849985 // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect

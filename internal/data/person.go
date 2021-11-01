@@ -1,13 +1,15 @@
 package data
 
 import (
+	"gitlab.com/distributed_lab/kit/pgdb"
 	"gitlab.com/tokend/subgroup/project/resources"
 )
 
 type PersonQ interface {
 	New() PersonQ
 	Get() (*Person, error)
-	Select() ([]Person, error)
+	//Select() ([]Person, error)
+	Select(query pgdb.OffsetPageParams) ([]Person, error)
 	Insert(data Person) (Person, error)
 	Update(data Person) (Person, error)
 	FilterById(data int64) PersonQ

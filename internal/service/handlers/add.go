@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func POSTHandler(w http.ResponseWriter, r *http.Request) {
+func Add(w http.ResponseWriter, r *http.Request) {
 	var p resources.PersonResponse
 	err := json.NewDecoder(r.Body).Decode(&p)
 	if err != nil {
@@ -22,11 +22,10 @@ func POSTHandler(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		Log(r).WithError(err).Debug("error inserting person")
+		Log(r).WithError(err).Error("error inserting person")
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
 }
-
