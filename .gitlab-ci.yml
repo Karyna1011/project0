@@ -1,0 +1,70 @@
+services:
+- docker:dind
+
+variables:
+  REGISTRY: registry.subgroup
+  IMAGE_NAME: $REGISTRY:$CI_COMMIT_SHA
+  DH_IMAGE_NAME: tokend/project
+
+
+stages:
+- build
+- pages
+- publish
+- latest
+
+# build and publish docker image to the registry
+build:
+  image: docker:latest
+  stage: build
+  tags:
+  - tokend
+  script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  - version=$(test -z $CI_COMMIT_TAG && echo $CI_COMMIT_SHA || echo $CI_COMMIT_TAG)
+  - docker build --build-arg VERSION="$version" --pull -t $IMAGE_NAME .
+  - docker push $IMAGE_NAME
+pages:
+  image: node:8
+  stage: pages
+  tags:
+  - tokend
+  only:
+    refs:
+    - master
+    changes:
+    - docs/**/*
+  script:
+  - cd docs
+  - npm install
+  - mkdir -p ../public
+  - npm run release-build
+  artifacts:
+    paths:
+    - public
+publish:
+  image: docker:latest
+  stage: publish
+  tags:
+  - tokend
+  only:
+  - /^\d+\.\d+\.\d+.*$/
+  script:
+  - RELEASE=$CI_COMMIT_REF_NAME
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  - docker pull $IMAGE_NAME
+  - docker tag $IMAGE_NAME $REGISTRY:$RELEASE
+  - docker push $DH_IMAGE_NAME:$RELEASE
+
+latest:
+  image: docker:latest
+  stage: latest
+  tags:
+    - tokend
+  only:
+    - master
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker pull $IMAGE_NAME
+    - docker tag $IMAGE_NAME $REGISTRY:latest
+    - docker push $REGISTRY:latest

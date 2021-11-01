@@ -1,0 +1,31 @@
+parameters:
+  - name: id
+    in: path
+    description: Component identifier
+    required: true
+    schema:
+      type: integer
+
+get:
+  tags:
+    - Component
+  summary: Get Component by ID
+  description: Get component by database record ID
+  operationId: component
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/Component'
+    '400':
+      description: invalid request
+    '401':
+      description: not allowed
+    '500':
+      description: internal error

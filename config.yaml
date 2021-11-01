@@ -1,0 +1,18 @@
+log:
+  level: debug
+  disable_sentry: true
+
+db:
+  url: postgres://karyna:karyna@localhost:5432/karyna?sslmode=disable
+
+listener:
+  addr: :8090 # TODO configure and rm this TODO
+
+cop:
+  disabled: true
+  endpoint: "https://localhost"
+  service_name: project
+  service_port: 8090
+
+
+

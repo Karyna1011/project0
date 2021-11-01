@@ -1,0 +1,21 @@
+allOf:
+  - $ref: '#/components/schemas/PersonKey'
+  - type: object
+    required:
+      - attributes
+    properties:
+      attributes:
+        type: object
+        required:
+          - name
+          - duration
+          - completed
+        properties:
+          name:
+            type: string
+          duration:
+            type: integer
+            format: int64
+          completed:
+            type: boolean
+            format: bool
