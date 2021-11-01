@@ -34,9 +34,9 @@ An event listener to store information in the database.
 To change port, configure
 ```sh
 listener:
-  addr: :8010
+  addr: :8090
 ```
-where *8010* is a port to listen on.
+where *8090* is a port to listen on.
 
 #### Endpoints
 ```sh
