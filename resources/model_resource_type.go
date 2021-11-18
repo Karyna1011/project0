@@ -8,5 +8,6 @@ type ResourceType string
 
 // List of ResourceType
 const (
+	DEBTOR ResourceType = "debtor"
 	PERSON ResourceType = "person"
 )

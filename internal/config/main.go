@@ -13,6 +13,9 @@ type Config interface {
 	pgdb.Databaser
 	types.Copuser
 	comfig.Listenerer
+	TransferConfig() TransferConfig
+	ContractConfig() ContractConfig
+	Ether
 }
 
 type config struct {
@@ -20,8 +23,12 @@ type config struct {
 	pgdb.Databaser
 	types.Copuser
 	comfig.Listenerer
-	getter kv.Getter
-	once   comfig.Once
+	getter         kv.Getter
+	once           comfig.Once
+	transferConfig TransferConfig
+	contractConfig ContractConfig
+	onceTransfer   comfig.Once
+	Ether
 }
 
 func New(getter kv.Getter) Config {
@@ -30,6 +37,7 @@ func New(getter kv.Getter) Config {
 		Databaser:  pgdb.NewDatabaser(getter),
 		Copuser:    copus.NewCopuser(getter),
 		Listenerer: comfig.NewListenerer(getter),
+		Ether:      NewEther(getter),
 		Logger:     comfig.NewLogger(getter, comfig.LoggerOpts{}),
 	}
 }

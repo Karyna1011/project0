@@ -4,6 +4,6 @@
 
 package resources
 
-type PersonAttributes struct {
+type DebtorAttributes struct {
 	Address string `json:"address"`
 }

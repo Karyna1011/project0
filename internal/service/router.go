@@ -17,14 +17,14 @@ func (s *service) router(cfg config.Config) chi.Router {
 		ape.CtxMiddleware(
 			handlers.CtxLog(s.log),
 			handlers.CtxPerson(postgres.NewPersonQ(cfg.DB())),
+			handlers.CtxDebtor(postgres.NewDebtorQ(cfg.DB())),
 		),
 	)
 
 	r.Route("/integrations/project", func(r chi.Router) {
-		r.Post("/add", handlers.Add)
-		r.Get("/list", handlers.List)
+		r.Get("/list_of_people", handlers.List)
+		r.Get("/list_of_debtors", handlers.ListDebtors)
 		r.Get("/get/{id}", handlers.GetByIndex)
-		r.Get("/info", handlers.Info)
 	})
 
 	return r

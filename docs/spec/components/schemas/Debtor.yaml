@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '#/components/schemas/PersonKey'
+  - $ref: '#/components/schemas/DebtorKey'
   - type: object
     required:
       - attributes

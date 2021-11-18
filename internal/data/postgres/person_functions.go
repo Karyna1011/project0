@@ -2,9 +2,8 @@ package postgres
 
 import (
 	"database/sql"
-	"gitlab.com/tokend/subgroup/project/internal/data"
-
 	"github.com/fatih/structs"
+	"gitlab.com/tokend/subgroup/project/internal/data"
 
 	"github.com/Masterminds/squirrel"
 
@@ -84,3 +83,43 @@ func (d personQ) FilterById(Id int64) data.PersonQ {
 
 	return &d
 }
+
+func (d personQ) FilterByAddress(Address string) data.PersonQ {
+	d.sql = d.sql.Where(squirrel.Eq{"address": Address})
+
+	return &d
+}
+
+/*func (q *personQ) GetNotActiveAddressesAmount() (int64, error) {
+	var result int64
+	stmt := q.sql.Select("COUNT (*)").From(addressTableName).Where(sq.Eq{"active": false})
+	err := q.db.Get(&result, stmt)
+	if err == sql.ErrNoRows {
+		return 0, err
+	}
+	if err != nil {
+		return 0, err
+	}
+	return result, nil
+}*/
+
+/*func (d personQ) MaxId(Address string) data.PersonQ {
+	//f:=squirrel.Select(*).Where()
+
+	d.sql = d.sql.Where(squirrel.Eq{"id": })
+
+	return &d
+}
+
+func (d *personQ) GetAmount() (int64, error) {
+	var result int64
+	stmt := squirrel.Select("*").From(tablePerson)
+	err := d.db.Get(&result, stmt)
+	if err == sql.ErrNoRows {
+		return 0, err
+	}
+	if err != nil {
+		return 0, err
+	}
+	return result, nil
+}*/

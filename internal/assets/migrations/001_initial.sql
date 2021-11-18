@@ -3,9 +3,8 @@
 CREATE TABLE person
 (
     id        bigserial    not null,
-    name      text not null,
-    duration  bigint          not null,
-    completed bool         not null
+    address      text         not null UNIQUE,
+    PRIMARY KEY (id)
 );
 
 -- +migrate Down

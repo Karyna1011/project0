@@ -5,9 +5,19 @@ log:
 db:
   url: postgres://karyna:karyna@localhost:5432/karyna?sslmode=disable
 
+transfer:
+  block:  0
+  time: 1m
+
+contract:
+  address: 0x325Bd9C7c351C56E0285f0A9d5075735765DF804
+
+
 listener:
   addr: :8090 # TODO configure and rm this TODO
 
+rpc:
+  endpoint: "http://localhost:8545"
 cop:
   disabled: true
   endpoint: "https://localhost"

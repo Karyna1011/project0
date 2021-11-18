@@ -46,9 +46,7 @@ func newPersonModel(person data.Person) resources.Person {
 			Type: resources.PERSON,
 		},
 		Attributes: resources.PersonAttributes{
-			Name:      person.Name,
-			Completed: person.Completed,
-			Duration:  person.Duration,
+			Address: person.Address,
 		},
 	}
 }

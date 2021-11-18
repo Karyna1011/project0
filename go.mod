@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/Masterminds/squirrel v1.4.0
 	github.com/alecthomas/kingpin v2.2.6+incompatible
-	github.com/ethereum/go-ethereum v1.10.11 // indirect
+	github.com/ethereum/go-ethereum v1.10.11
 	github.com/fatih/structs v1.1.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-chi/chi/v5 v5.0.0 // indirect
@@ -19,7 +19,7 @@ require (
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/spf13/cobra v1.2.1 // indirect
 	gitlab.com/distributed_lab/ape v1.6.1
-	gitlab.com/distributed_lab/figure v2.1.0+incompatible // indirect
+	gitlab.com/distributed_lab/figure v2.1.0+incompatible
 	gitlab.com/distributed_lab/kit v1.8.6
 	gitlab.com/distributed_lab/logan v3.8.0+incompatible
 	gitlab.com/distributed_lab/urlval v2.3.0+incompatible
